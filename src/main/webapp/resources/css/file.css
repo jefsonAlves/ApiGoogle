@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+body {
+	font-size: 12px; font-family; " Helvetica Neue", Helvetica, Arial,
+	sans-serif;
+	margin: 20px;
+
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: 4050;
+	color: #3b4d64 !important;
+}
+
+#produtos {
+	background: #F9F9F9;
+	width: 1200px; /*aumenta a resolução da imagem da borda laterais*/
+	height: 390px; /*aumenta a borda ou diminui a inferior*/
+}
+
+#tabela{
+position:static; 
+	left: 90px; /* posiciona a 90px para a esquerda */ 
+	top: 70px; /* posiciona a 70px para baixo */
+}

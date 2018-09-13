@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Ordem de Serviço</title>
+	<head>
+	</head>
+</h:head>
+<h:body>
+	<h:form id="tudo">
+		<p:panel id="tot">
+			<f:facet name="header">
+				<p:spacer width="30" height="10" />
+				<p:outputLabel value="#{googleDisCtrl.rest}" />
+
+			</f:facet>
+		</p:panel>
+		<p:panelGrid columns="4" id="tabCad">
+			<h:outputLabel value="Origem" />
+			<p:inputText value="#{googleDisCtrl.origem}" />
+
+			<h:outputLabel value="Destino:" />
+			<p:inputText value="#{googleDisCtrl.destino}" />
+		</p:panelGrid>
+
+		<p:commandButton value="Calcular distância"
+			action="#{googleDisCtrl.calcularDis()}" update="@form: tudo" />
+	</h:form>
+	<h:form id="formAdd">
+
+
+		<p:panel id="tot">
+			<f:facet name="header">
+				<p:spacer width="30" height="10" />
+				<p:outputLabel value="Valor Total à Receber: " />
+				<p:outputLabel value="R$#{chamadoCtrl.valorTotal}">
+					<f:convertNumber minFractionDigits="2" />
+				</p:outputLabel>
+			</f:facet>
+		</p:panel>
+		<p:panelGrid columns="4" id="tabCad">
+			<h:outputLabel value="Nª do Chamado:" />
+			<p:inputText value="#{chamadoCtrl.ch.numChamado}" />
+
+			<h:outputLabel value="Tipo de Despesas:" />
+			<p:inputText value="#{chamadoCtrl.ch.tipoDespesa}" />
+
+			<h:outputLabel value="Destino Inicial:" />
+			<p:inputText value="#{chamadoCtrl.ch.deslInicial}" />
+
+			<h:outputLabel value="Destino Final:" />
+			<p:inputText value="#{chamadoCtrl.ch.deslFinal}" />
+
+		</p:panelGrid>
+
+		<p:commandButton update="@form: tudo"
+			action="#{chamadoCtrl.addChamados(googleDisCtrl.rest, googleDisCtrl.distancia)}"
+			value="Add chamado" />
+
+		<p:dataTable id="chamado" value="#{chamadoCtrl.listaChamados}"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+			paginator="true" rows="10" style="margin-bottom:20px" var="chato"
+			emptyMessage="Você não possui itens no Carrinho.">
+
+			<f:facet name="{Exporters}">
+				<h:commandLink action="ordemservico.xhtml">
+					<p:graphicImage value="/resources/imagens/imprimir.png" width="24" />
+
+				</h:commandLink>
+			</f:facet>
+
+			<p:column headerText="Data">
+				<h:outputText value="#{chato.data}" />
+			</p:column>
+
+			<p:column headerText="Nª Ch">
+				<h:outputText value="#{chato.numChamado}" />
+			</p:column>
+
+			<p:column headerText="Despesas">
+				<h:outputText value="#{chato.tipoDespesa}" />
+			</p:column>
+
+			<p:column headerText="Desp Inicial">
+				<h:outputText value="#{chato.deslInicial}" />
+			</p:column>
+
+			<p:column headerText="Desp Final">
+				<h:outputText value="#{chato.deslFinal}" />
+			</p:column>
+
+			<p:column headerText="km">
+				<h:outputText value="#{chato.km}" />
+			</p:column>
+
+			<p:column headerText="Valor Unit">
+				<h:outputText value="#{chato.valorUnitario}">
+					<f:convertNumber minFractionDigits="2" />
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Link">
+					<h:outputText value="#{chato.url}" />
+			</p:column>
+
+		</p:dataTable>
+
+
+	</h:form>
+
+</h:body>
+</html>
